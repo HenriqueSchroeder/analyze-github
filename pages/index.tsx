@@ -1,10 +1,5 @@
-import type { NextPage } from 'next'
-import {
-  signIn,
-  useSession,
-  getSession,
-  GetSessionParams
-} from 'next-auth/react'
+import { signIn, getSession, GetSessionParams } from 'next-auth/react'
+import { MyNextPage } from '../next-auth'
 
 /**
  * Server side.
@@ -33,7 +28,7 @@ export async function getServerSideProps(
 /**
  * Page.
  */
-const Index: NextPage = () => {
+const Index: MyNextPage = () => {
   /**
    * JSX.
    */

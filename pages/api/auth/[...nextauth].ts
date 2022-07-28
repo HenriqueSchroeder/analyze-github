@@ -1,5 +1,5 @@
-import NextAuth, { NextAuthOptions } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 
 import { CLIENT_ID, CLIENT_SECRET, NEXTAUTH_SECRET } from '../../../config/env'
 
@@ -13,9 +13,6 @@ export const authOptions: NextAuthOptions = {
       clientSecret: CLIENT_SECRET
     })
   ],
-  jwt: {
-    maxAge: 30 * 24 * 30 * 60
-  },
   callbacks: {
     async jwt({ token, account }) {
       /**

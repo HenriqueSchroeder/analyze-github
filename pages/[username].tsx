@@ -6,7 +6,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   const username = context.params?.username
 
-  if (session?.user?.name !== username) {
+  if (!!session?.user?.name && session?.user?.name !== username) {
     return {
       redirect: {
         destination: `/${session?.user?.name}`,
@@ -25,10 +25,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
 /**
  * Page.
  */
-function User() {
-  const { status, data } = useSession({
-    required: true
-  })
+export default function User() {
+  const { status, data } = useSession()
 
   /**
    * JSX.
@@ -39,7 +37,7 @@ function User() {
         User, {status} {data?.user?.name}
         <button
           onClick={() => {
-            signOut()
+            signOut({ callbackUrl: '/' })
           }}
         >
           signOut
@@ -49,4 +47,4 @@ function User() {
   )
 }
 
-export default User
+User.auth = true

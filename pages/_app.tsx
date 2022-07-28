@@ -1,10 +1,21 @@
+import { Auth } from '../components/Auth'
 import { SessionProvider } from 'next-auth/react'
-import type { AppProps } from 'next/app'
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+import { MyAppProps } from '../next-auth'
+
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps }
+}: MyAppProps) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      {Component.auth ? (
+        <Auth>
+          <Component {...pageProps} />
+        </Auth>
+      ) : (
+        <Component {...pageProps} />
+      )}
     </SessionProvider>
   )
 }
