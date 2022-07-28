@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/react'
+import { getToken } from 'next-auth/jwt'
 import { NextRequest, NextResponse } from 'next/server'
 
 import parseUrl from './lib/parseUrl'
@@ -26,19 +26,9 @@ export async function middleware(request: NextRequest) {
   }
 
   /**
-   * Set request for NextAuth.
-   */
-  const requestForNextAuth: any = {
-    headers: {
-      cookie: request.headers.get('cookie')
-    }
-  }
-
-  /**
    * Get the session.
    */
-  const session = await getSession({ req: requestForNextAuth })
-
+  const session = await getToken({ req: request, raw: true })
   /**
    * If the session is not authenticated, redirect to the signin page.
    */

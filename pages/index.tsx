@@ -17,7 +17,7 @@ export async function getServerSideProps(
   if (session) {
     return {
       redirect: {
-        destination: '/Home',
+        destination: `/${session.user?.name}`,
         permanent: false
       }
     }
@@ -34,8 +34,6 @@ export async function getServerSideProps(
  * Page.
  */
 const Index: NextPage = () => {
-  const { data, status } = useSession()
-
   /**
    * JSX.
    */
