@@ -24,17 +24,3 @@ declare module 'next-auth/jwt' {
     acessToken?: string
   }
 }
-
-export type MyNextPage<P = {}, IP = P> = NextComponentType<
-  MyNextPageContext,
-  IP,
-  P
->
-
-export interface MyAppProps extends AppProps {
-  Component: NextComponentType<MyNextPageContext, any, P>
-}
-
-export interface MyNextPageContext extends NextPageContext {
-  auth?: boolean = false
-}

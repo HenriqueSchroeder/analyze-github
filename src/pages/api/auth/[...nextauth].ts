@@ -10,8 +10,8 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GithubProvider({
       clientId: CLIENT_ID,
-      clientSecret: CLIENT_SECRET
-    })
+      clientSecret: CLIENT_SECRET,
+    }),
   ],
   callbacks: {
     async jwt({ token, account }) {
@@ -29,9 +29,13 @@ export const authOptions: NextAuthOptions = {
        */
       session.accessToken = token.accessToken
       return session
-    }
+    },
   },
-  secret: NEXTAUTH_SECRET
+  secret: NEXTAUTH_SECRET,
+  pages: {
+    signIn: '/',
+    error: '/',
+  },
 }
 
 export default NextAuth(authOptions)

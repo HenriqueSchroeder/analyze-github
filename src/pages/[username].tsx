@@ -10,15 +10,15 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return {
       redirect: {
         destination: `/${session?.user?.name}`,
-        permanent: false
-      }
+        permanent: false,
+      },
     }
   }
 
   return {
     props: {
-      session
-    }
+      session,
+    },
   }
 }
 
@@ -38,13 +38,10 @@ export default function User() {
         <button
           onClick={() => {
             signOut({ callbackUrl: '/' })
-          }}
-        >
+          }}>
           signOut
         </button>
       </h1>
     </div>
   )
 }
-
-User.auth = true

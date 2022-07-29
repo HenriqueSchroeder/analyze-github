@@ -1,11 +1,11 @@
+import { NextPage } from 'next'
 import { signIn, getSession, GetSessionParams } from 'next-auth/react'
-import { MyNextPage } from '../next-auth'
 
 /**
  * Server side.
  */
 export async function getServerSideProps(
-  context: GetSessionParams | undefined
+  context: GetSessionParams | undefined,
 ) {
   const session = await getSession(context)
 
@@ -13,22 +13,22 @@ export async function getServerSideProps(
     return {
       redirect: {
         destination: `/${session.user?.name}`,
-        permanent: false
-      }
+        permanent: false,
+      },
     }
   }
 
   return {
     props: {
-      session
-    }
+      session,
+    },
   }
 }
 
 /**
  * Page.
  */
-const Index: MyNextPage = () => {
+const Index: NextPage = () => {
   /**
    * JSX.
    */
@@ -37,8 +37,7 @@ const Index: MyNextPage = () => {
       <button
         onClick={() => {
           signIn('github')
-        }}
-      >
+        }}>
         GitHub
       </button>
     </div>
