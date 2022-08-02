@@ -11,23 +11,51 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
+      profile(profile, tokens) {
+        return {
+          id: profile.id.toString(),
+          url: profile.html_url,
+          name: profile.name ?? profile.login,
+          type: profile.type,
+          login: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+          html_url: profile.html_url,
+        }
+      },
     }),
   ],
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, user }) {
       /**
-       * Persist the OAuth access_token to the token right after signin.
+       * Some user data.
        */
-      if (account) {
-        token.accessToken = account.access_token
+      if (user) {
+        token.id = user.id
+        token.url = user.url
+        token.type = user.type
+        token.email = user.email
+        token.image = user.image
+        token.login = user.login
+        token.html_url = user.html_url
       }
       return token
     },
     async session({ session, token }) {
       /**
-       * Send properties to the client, like an access_token from a provider.
+       * Some user data.
        */
-      session.accessToken = token.accessToken
+      session.user = {
+        id: token.id,
+        url: token.url,
+        name: token.name ?? token.login,
+        type: token.type,
+        email: token.email,
+        image: token.image,
+        login: token.login,
+        html_url: token.html_url,
+      }
+
       return session
     },
   },

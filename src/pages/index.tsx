@@ -1,5 +1,7 @@
-import { NextPage } from 'next'
-import { signIn, getSession, GetSessionParams } from 'next-auth/react'
+import { Flex, Container } from '@chakra-ui/react'
+import { getSession, GetSessionParams } from 'next-auth/react'
+
+import { Login } from '../components/Login'
 
 /**
  * Server side.
@@ -12,7 +14,7 @@ export async function getServerSideProps(
   if (session) {
     return {
       redirect: {
-        destination: `/${session.user?.name}`,
+        destination: `/${session?.user.login}`,
         permanent: false,
       },
     }
@@ -28,20 +30,15 @@ export async function getServerSideProps(
 /**
  * Page.
  */
-const Index: NextPage = () => {
+export default function IndexPage() {
   /**
    * JSX.
    */
   return (
-    <div>
-      <button
-        onClick={() => {
-          signIn('github')
-        }}>
-        GitHub
-      </button>
-    </div>
+    <Container maxW={'3xl'}>
+      <Flex minH={'100vh'} align={'center'} justify={'center'}>
+        <Login />
+      </Flex>
+    </Container>
   )
 }
-
-export default Index

@@ -7,20 +7,36 @@ declare module 'next-auth' {
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   interface Session {
-    user?: {
-      name: string
-      email: string
-      image: string
-    }
-    acessToken: string
+    user: User
     expires: ISODateString
+  }
+
+  /**
+   * User.
+   */
+  interface User {
+    id: string
+    url: string
+    name: string | null
+    type: string
+    login: string
+    email: string | null
+    image: string
+    html_url: string
   }
 }
 
 declare module 'next-auth/jwt' {
-  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  /**
+   * JWT.
+   */
   interface JWT {
-    /** OpenID ID Token */
-    acessToken?: string
+    id: string
+    url: string
+    type: string
+    login: string
+    email: string | null
+    image: string
+    html_url: string
   }
 }
