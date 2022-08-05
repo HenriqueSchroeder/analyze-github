@@ -47,7 +47,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
   /**
    * Get user.
    */
-  const { data } = await apiGitHub.user()
+  const { data } = await new apiGitHub(
+    session?.user.access_token as string,
+  ).user()
 
   return { props: { dataUser: data } }
 }
