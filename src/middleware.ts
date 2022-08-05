@@ -1,5 +1,8 @@
 import { withAuth } from 'next-auth/middleware'
 
+/**
+ * URLs publics.
+ */
 import { publicUrls } from './config/pages'
 
 /**
@@ -8,13 +11,21 @@ import { publicUrls } from './config/pages'
 export default withAuth({
   callbacks: {
     authorized: async ({ token, req }) => {
+      /**
+       * URL.
+       */
       const url = req.url
+
+      /**
+       * Check if the URL is public.
+       */
       const isPublicUrl = publicUrls.some(publicUrl => publicUrl.test(url))
+
       if (isPublicUrl) {
         return true
       }
 
-      return !!token
+      return !!token && !!token.access_token
     },
   },
   pages: {

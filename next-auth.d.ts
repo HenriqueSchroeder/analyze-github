@@ -23,6 +23,7 @@ declare module 'next-auth' {
     email: string | null
     image: string
     html_url: string
+    access_token?: string
   }
 }
 
@@ -38,5 +39,6 @@ declare module 'next-auth/jwt' {
     email: string | null
     image: string
     html_url: string
+    access_token?: string
   }
 }

@@ -1,6 +1,7 @@
 import GithubProvider from 'next-auth/providers/github'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 
+import { clearAccessToken, definesAccessToken } from '../../../services/GitHub'
 import { CLIENT_ID, CLIENT_SECRET, NEXTAUTH_SECRET } from '../../../config/env'
 
 export const authOptions: NextAuthOptions = {
@@ -11,7 +12,7 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
-      profile(profile, tokens) {
+      profile(profile) {
         return {
           id: profile.id.toString(),
           url: profile.html_url,
@@ -26,7 +27,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
+      if (account?.access_token) {
+        token.access_token = account.access_token
+      }
+
       /**
        * Some user data.
        */
@@ -54,9 +59,19 @@ export const authOptions: NextAuthOptions = {
         image: token.image,
         login: token.login,
         html_url: token.html_url,
+        access_token: token.access_token,
+      }
+
+      if (session.user?.access_token) {
+        definesAccessToken(session.user?.access_token)
       }
 
       return session
+    },
+  },
+  events: {
+    async signOut() {
+      clearAccessToken()
     },
   },
   secret: NEXTAUTH_SECRET,
