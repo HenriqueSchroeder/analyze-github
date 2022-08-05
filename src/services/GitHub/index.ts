@@ -31,6 +31,7 @@ axiosGitHub.interceptors.response.use(
  * Define the access token.
  */
 export const definesAccessToken = (accessToken: string) => {
+  console.log('Defines access token.')
   axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`
 }
 
