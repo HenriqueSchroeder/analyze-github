@@ -8,7 +8,13 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html lang="pt-br">
-        <Head />
+        <Head>
+          <meta
+            name="google-site-verification"
+            content="C0_4iFQ83kL1XdJ2GFUqMd_YozJ1K_9zDDU9sQtCwKw"
+          />
+        </Head>
+
         <body>
           <ColorModeScript initialColorMode={'dark'} />
           <Main />

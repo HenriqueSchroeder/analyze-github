@@ -11,6 +11,7 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
+      authorization: { params: { scope: 'read:user user:email read:org' } },
       profile(profile) {
         return {
           id: profile.id.toString(),
