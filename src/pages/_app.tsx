@@ -9,7 +9,10 @@ import { SessionProvider } from 'next-auth/react'
   }
 */
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <SessionProvider session={session}>
       <ChakraProvider>
@@ -18,5 +21,3 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     </SessionProvider>
   )
 }
-
-export default MyApp

@@ -1,7 +1,9 @@
 {
   "name": "analyze-github",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "description": "Analyze GitHub repositories",
+  "author": "Henrique Schroeder",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +15,7 @@
     "@chakra-ui/react": "^2.2.4",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@next/bundle-analyzer": "^12.2.5",
     "axios": "^0.27.2",
     "framer-motion": "^6",
     "jsonwebtoken": "^8.5.1",
