@@ -6,5 +6,5 @@ export const {
   CLIENT_SECRET = '',
 
   NEXTAUTH_URL = '',
-  NEXTAUTH_SECRET = ''
+  NEXTAUTH_SECRET = '',
 } = process.env

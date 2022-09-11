@@ -1,5 +1,5 @@
 import { signIn } from 'next-auth/react'
-import { Heading, Stack, Text, Button } from '@chakra-ui/react'
+import { Box, Button, Stack, Typography, Container } from '@mui/material'
 
 /**
  * Component.
@@ -9,40 +9,37 @@ export function Login() {
    * JSX.
    */
   return (
-    <Stack textAlign={'center'} spacing={{ base: 8, md: 14 }}>
-      <Heading
-        fontWeight={600}
-        fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
-        lineHeight={'110%'}>
-        Analyze
-        <br />
-        <Text as={'span'} color={'green.400'}>
-          GitHub
-        </Text>
-      </Heading>
+    <Container>
+      <Box
+        display="flex"
+        minHeight="100vh"
+        flexDirection="column"
+        justifyContent="center">
+        <Box justifyContent="center" textAlign={'center'}>
+          <Stack justifyContent="center" textAlign={'center'}>
+            <Typography fontSize={70} fontWeight={'bold'}>
+              Analyze
+            </Typography>
 
-      {/* <Text color={'gray.500'}>...</Text> */}
+            <Typography
+              color={'secondary'}
+              fontSize={70}
+              fontWeight={'bold'}
+              marginBottom={'1rem'}>
+              GitHub
+            </Typography>
+          </Stack>
 
-      <Stack
-        direction={'column'}
-        spacing={3}
-        align={'center'}
-        alignSelf={'center'}
-        position={'relative'}>
-        <Button
-          colorScheme={'green'}
-          bg={'green.400'}
-          rounded={'full'}
-          px={6}
-          _hover={{
-            bg: 'green.500',
-          }}
-          onClick={() => {
-            signIn('github')
-          }}>
-          Entrar
-        </Button>
-      </Stack>
-    </Stack>
+          <Button
+            color="secondary"
+            variant="contained"
+            onClick={() => {
+              signIn('github')
+            }}>
+            Entrar
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   )
 }

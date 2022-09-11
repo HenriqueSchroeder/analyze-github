@@ -2,17 +2,13 @@ import { signOut } from 'next-auth/react'
 import { getSession } from 'next-auth/react'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import {
-  Box,
-  Flex,
-  Text,
-  Link,
-  Stack,
+  Card,
   Button,
-  Avatar,
-  Center,
-  Heading,
-  useColorModeValue,
-} from '@chakra-ui/react'
+  CardMedia,
+  Typography,
+  CardActions,
+  CardContent,
+} from '@mui/material'
 
 /**
  * Services.
@@ -70,65 +66,26 @@ export default function UserPage({ dataUser }: { dataUser: User }) {
    * JSX.
    */
   return (
-    <Center py={6}>
-      <Box
-        maxW={'270px'}
-        w={'full'}
-        mt={'100px'}
-        bg={useColorModeValue('white', 'gray.800')}
-        boxShadow={'2xl'}
-        rounded={'md'}
-        overflow={'hidden'}>
-        <Flex justify={'center'} mt={'10px'}>
-          <Avatar
-            size={'xl'}
-            src={dataUser.avatar_url}
-            css={{
-              border: '2px solid white',
-            }}
-          />
-        </Flex>
-
-        <Box p={6}>
-          <Stack spacing={0} align={'center'} mb={5}>
-            <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-              {dataUser.name}
-            </Heading>
-            <Link py={2} color={'gray.500'} href={dataUser.html_url}>
-              {dataUser.login}
-            </Link>
-          </Stack>
-
-          <Stack direction={'row'} justify={'center'} spacing={6}>
-            <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>{dataUser.followers}</Text>
-              <Text fontSize={'sm'} color={'gray.500'}>
-                Seguidores
-              </Text>
-            </Stack>
-            <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>{dataUser.following}</Text>
-              <Text fontSize={'sm'} color={'gray.500'}>
-                Seguindo
-              </Text>
-            </Stack>
-          </Stack>
-
-          <Button
-            w={'full'}
-            mt={8}
-            bg={useColorModeValue('#151f21', 'gray.900')}
-            color={'white'}
-            rounded={'md'}
-            _hover={{
-              transform: 'translateY(-2px)',
-              boxShadow: 'lg',
-            }}
-            onClick={() => signOut()}>
-            SAIR
-          </Button>
-        </Box>
-      </Box>
-    </Center>
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        image={dataUser.avatar_url}
+        title={dataUser.login}
+        alt={dataUser.login}
+        sx={{ height: '200px' }}
+      />
+      <CardContent>
+        <Typography>{dataUser.name}</Typography>
+      </CardContent>
+      <CardActions>
+        <Button
+          size="small"
+          onClick={() => {
+            signOut()
+          }}>
+          Sair
+        </Button>
+      </CardActions>
+    </Card>
   )
 }

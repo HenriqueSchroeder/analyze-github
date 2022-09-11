@@ -1,5 +1,5 @@
-import { Flex, Container } from '@chakra-ui/react'
 import { getSession, GetSessionParams } from 'next-auth/react'
+import Head from 'next/head'
 
 /**
  * Components.
@@ -36,10 +36,11 @@ export default function IndexPage() {
    * JSX.
    */
   return (
-    <Container maxW={'3xl'}>
-      <Flex minH={'100vh'} align={'center'} justify={'center'}>
-        <Login />
-      </Flex>
-    </Container>
+    <div>
+      <Head>
+        <title>Analyze GitHub</title>
+      </Head>
+      <Login />
+    </div>
   )
 }
